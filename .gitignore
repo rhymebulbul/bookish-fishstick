@@ -208,5 +208,5 @@ __marimo__/
 
 # Pycharm
 .idea/
-#config.json
-#data/
+config.json
+data/
