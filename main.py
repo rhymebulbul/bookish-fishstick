@@ -27,7 +27,7 @@ I hope you're doing well!
 
 I recently attended the industry networking event at Monash University on July 25th hosted by the Faculty of Engineering, where I had the chance to learn more about the exciting work happening at {company}. The insights I gained reaffirmed my interest in contributing to innovative, impactful engineering teams like yours.
 
-I’m a Software Engineer with hands-on experience in cloud platforms, infrastructure automation, fullstack and backend systems using Java, Python & Javascript/Typescript. I’m especially drawn to environments where I can grow technically while contributing to real-world solutions — something I believe your team exemplifies.
+I’m a Software Engineer with overs 3 years of full-time hands-on experience in cloud platforms, infrastructure automation, fullstack and backend systems using Java, Python & Javascript/Typescript. I’m especially drawn to environments where I can grow technically while contributing to real-world solutions — something I believe your team exemplifies.
 
 Please find my resume attached. I’d be genuinely grateful for a chance to connect or to be considered for any opportunities you think might align.
 
@@ -53,8 +53,8 @@ def send_email(to_email, to_name, company):
     # Attach resume
     try:
         with open(RESUME_PATH, 'rb') as f:
-            resume = MIMEApplication(f.read(), _subtype='docx')
-            resume.add_header('Content-Disposition', 'attachment', filename='Rhyme_Bulbul_Resume.docx')
+            resume = MIMEApplication(f.read(), _subtype='pdf')
+            resume.add_header('Content-Disposition', 'attachment', filename='Rhyme_Bulbul_Resume.pdf')
             msg.attach(resume)
     except FileNotFoundError:
         print(f"❌ Resume not found at {RESUME_PATH}")
