@@ -25,29 +25,33 @@ EMAIL_TEMPLATE = """Hi {name},
 
 I hope you're doing well!
 
-I recently attended the industry networking event at Monash University on July 25th hosted by the Faculty of Engineering, where I had the chance to learn more about the exciting work happening at {company}. The insights I gained reaffirmed my interest in contributing to innovative, impactful engineering teams like yours.
+I had the pleasure of attending the Monash University engineering networking event on July 25th, where I learned about the inspiring work happening at {company}. It left a strong impression, and I wanted to reach out personally.
 
-I’m a Software Engineer with overs 3 years of full-time hands-on experience in cloud platforms, infrastructure automation, fullstack and backend systems using Java, Python & Javascript/Typescript. I’m especially drawn to environments where I can grow technically while contributing to real-world solutions — something I believe your team exemplifies.
+I'm Rhyme, a Software Engineer with over three years of experience across fullstack and backend systems — primarily working with Java, Python, and Typescript — as well as cloud infrastructure and automation. I’m drawn to roles that blend engineering rigour with real-world impact, and I’d be genuinely excited to contribute to a team like yours.
 
-Please find my resume attached. I’d be genuinely grateful for a chance to connect or to be considered for any opportunities you think might align.
+I’ve attached my resume, and I’d really appreciate the opportunity to chat or be considered for any current or future roles that might be a fit. You can reach me by replying here or giving me a call on 0434 711 292 — I’d love to connect.
 
-Kind regards,  
+Warm regards,  
 Rhyme Bulbul  
 LinkedIn: https://www.linkedin.com/in/rhyme-bulbul/
 """
 
-
 sent_emails = []
 missing_emails = []
 
-def send_email(to_email, to_name, company):
+def extract_first_name(full_name):
+    return full_name.split()[0] if full_name else "there"
+
+def send_email(to_email, full_name, company):
+    first_name = extract_first_name(full_name)
+
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = to_email
     msg['Subject'] = SUBJECT.format(company=company)
 
     # Add body
-    body = EMAIL_TEMPLATE.format(name=to_name, company=company)
+    body = EMAIL_TEMPLATE.format(name=first_name, company=company)
     msg.attach(MIMEText(body, 'plain'))
 
     # Attach resume
@@ -66,8 +70,8 @@ def send_email(to_email, to_name, company):
             server.starttls()
             server.login(SENDER_EMAIL, APP_PASSWORD)
             server.send_message(msg)
-            sent_emails.append((to_name, to_email, company))
-            print(f"✅ Sent email to {to_name} at {to_email} ({company})")
+            sent_emails.append((full_name, to_email, company))
+            print(f"✅ Sent email to {full_name} at {to_email} ({company})")
     except Exception as e:
         print(f"❌ Failed to send to {to_email}: {e}")
 
